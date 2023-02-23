@@ -1,6 +1,6 @@
 package no.nordicsemi.android.nrftoolbox.profile;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 
 public interface ILogger {
 

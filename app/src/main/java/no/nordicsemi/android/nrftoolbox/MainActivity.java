@@ -8,16 +8,20 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import no.nordicsemi.android.nrftoolbox.adapter.AppAdapter;
 
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 		final GridView grid = (GridView) findViewById(R.id.grid);
 		grid.setAdapter(new AppAdapter(this));
 		grid.setEmptyView(findViewById(android.R.id.empty));
-
+		initPermission();
 		//如果 API level 是大于等于 23(针对Android 6.0及以上系统) 时,需要判断是否具有权限
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -56,6 +60,28 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 	}
+
+	// todo 蓝牙动态申请权限
+	private void initPermission(){
+
+		List<String> mPermissionList = new ArrayList<>();
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+			// Android 版本大于等于 Android12 时
+			// 只包括蓝牙这部分的权限，其余的需要什么权限自己添加
+			mPermissionList.add(Manifest.permission.BLUETOOTH_SCAN);
+			mPermissionList.add(Manifest.permission.BLUETOOTH_ADVERTISE);
+			mPermissionList.add(Manifest.permission.BLUETOOTH_CONNECT);
+		} else {
+			// Android 版本小于 Android12 及以下版本
+			mPermissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+			mPermissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+		}
+
+		if(mPermissionList.size() > 0){
+			ActivityCompat.requestPermissions(this,mPermissionList.toArray(new String[0]),1001);
+		}
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {

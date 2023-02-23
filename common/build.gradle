@@ -23,14 +23,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.1'
+    compileSdkVersion 32
+    buildToolsVersion '32.1.0-rc1'
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 32
     }
     buildTypes {
         release {
@@ -41,6 +39,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:25.0.1'
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
 }

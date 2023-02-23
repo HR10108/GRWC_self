@@ -1,13 +1,11 @@
 package no.nordicsemi.android.nrftoolbox.uart;
 
-import android.app.Dialog;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Deque;
@@ -15,7 +13,6 @@ import java.util.LinkedList;
 import java.util.UUID;
 
 import no.nordicsemi.android.log.Logger;
-import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.profile.BleManager;
 import no.nordicsemi.android.nrftoolbox.utility.DataConvey;
 import no.nordicsemi.android.nrftoolbox.utility.ParserUtils;

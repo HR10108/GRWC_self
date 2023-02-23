@@ -14,7 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -24,7 +24,6 @@ import java.util.UUID;
 import no.nordicsemi.android.log.ILogSession;
 import no.nordicsemi.android.log.Logger;
 import no.nordicsemi.android.nrftoolbox.error.GattError;
-import no.nordicsemi.android.nrftoolbox.utility.DataConvey;
 import no.nordicsemi.android.nrftoolbox.utility.DebugLogger;
 import no.nordicsemi.android.nrftoolbox.utility.ParserUtils;
 
