@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="no.nordicsemi.android.nrftoolbox.gesture.GestureActivity"
+    android:weightSum="1">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_w_spinner"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation = "horizontal" >
+
+        <EditText
+            android:layout_width="110dp"
+            android:layout_height="60dp"
+            android:id="@+id/gestureData"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="90dp"
+            android:textSize="25dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gestureButton"
+            android:layout_toRightOf="@+id/gestureData"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="90dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+    <string name="uart_feature_title">UART</string>
+    <string name="uart_default_name">GRWC</string>
+    <string name="uart_notification_action_disconnect">Disconnect</string>
+    <string name="uart_notification_connected_message">%s is connected.</string>
+    <string name="uart_about_text">此页显示接收和发送的帧数据.\n\n水平滑动屏幕可以看到Log信息.\n\n点击连接按键开始通信并上传帧数据.\n\n再点击发送按键可下传帧数据.</string>
+
+</resources>

@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#FFFFFF"
+	android:orientation="vertical">
+
+	<!-- The size of text below must be fixed, therefore dp are used instead of sp -->
+
+	<no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
+		android:id="@+id/device_name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_marginLeft="21dp"
+		android:layout_marginTop="@dimen/feature_device_name_margin_top"
+		android:ellipsize="end"
+		android:freezesText="true"
+		android:maxLines="1"
+		android:text="@string/uart_default_name"
+		android:textAllCaps="true"
+		android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+	<Button
+		android:id="@+id/action_connect"
+		style="@style/Widget.Connect"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:onClick="onConnectClicked"
+		android:text="连接"
+		android:layout_above="@+id/spacer"
+		android:layout_alignStart="@+id/TXData" />
+
+	<View
+		android:id="@+id/spacer"
+		android:layout_width="wrap_content"
+		android:layout_height="10dp"
+		android:layout_alignParentBottom="true"/>
+
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="6dp"
+		android:id="@+id/imageView" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="接收的数据 :"
+		android:id="@+id/textView1"
+		android:layout_marginTop="90dp"
+		android:layout_below="@+id/device_name"
+		android:layout_toStartOf="@+id/device_name" />
+
+	<TextView
+		android:layout_width="260dp"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:id="@+id/RXData"
+		android:layout_marginTop="20dp"
+		android:layout_below="@+id/textView1"
+		android:layout_alignStart="@+id/textView1"
+		android:textSize="15dp" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="发送的数据 :"
+		android:id="@+id/textView2"
+		android:layout_marginTop="110dp"
+		android:layout_below="@+id/RXData"
+		android:layout_alignStart="@+id/TXData" />
+
+	<TextView
+		android:layout_width="260dp"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:text=""
+		android:id="@+id/TXData"
+		android:layout_marginTop="10dp"
+		android:layout_below="@+id/textView2"
+		android:layout_alignStart="@+id/RXData"
+		android:textSize="15dp" />
+
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		style="@style/Widget.Connect"
+		android:text="发送"
+		android:id="@+id/sendButton"
+		android:layout_above="@+id/spacer"
+		android:layout_alignEnd="@+id/TXData" />
+
+</RelativeLayout>

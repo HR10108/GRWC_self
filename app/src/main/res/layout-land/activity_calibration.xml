@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="no.nordicsemi.android.nrftoolbox.calibration.CalibrationActivity">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_w_spinner"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp" >
+
+        <TableRow android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="hmax_x : "
+                android:gravity="center"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:textColor="#FF69B4"
+                android:id="@+id/textview1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="hmin_x : " />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:textColor="#FF69B4"
+                android:id="@+id/textview2" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="hmax_y : " />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:textColor="#FF69B4"
+                android:id="@+id/textview3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="hmin_y : " />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:textColor="#FF69B4"
+                android:id="@+id/textview4" />
+        </TableRow>
+
+        <TableRow android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="hmax_z : " />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:textColor="#FF69B4"
+                android:id="@+id/textview5" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="hmin_z : " />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:textColor="#FF69B4"
+                android:id="@+id/textview6" />
+        </TableRow>
+
+     </TableLayout>
+
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation = "horizontal"
+         android:layout_marginLeft="100dp"
+         android:layout_marginRight="100dp"
+         android:layout_marginTop="50dp" >
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="开始标定"
+                style="@style/Widget.Calibration"
+                android:id="@+id/calibration_button1"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="状态显示"
+                style="@style/Widget.Calibration"
+                android:id="@+id/calibration_button3"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="退出"
+                style="@style/Widget.Calibration"
+                android:id="@+id/calibration_button2"
+                android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
