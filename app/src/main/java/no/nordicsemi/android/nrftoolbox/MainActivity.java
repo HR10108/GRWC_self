@@ -8,16 +8,22 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,27 +34,33 @@ import no.nordicsemi.android.nrftoolbox.adapter.AppAdapter;
 public class MainActivity extends AppCompatActivity {
 
 	static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 1;
+	BottomNavigationView bottomNav = null;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main_new);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        setSupportActionBar(toolbar);
-		toolbar.setOnMenuItemClickListener(onMenuItemClick);  // Menu item click 的监听事件一樣要設定在setSupportActionBar才有作用
+//        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+//        setSupportActionBar(toolbar);
+//		toolbar.setOnMenuItemClickListener(onMenuItemClick);  // Menu item click 的监听事件一樣要設定在setSupportActionBar才有作用
+//
+//		final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//		drawer.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+//
+//		// configure the app grid
+//		final GridView grid = (GridView) findViewById(R.id.grid);
+//		grid.setAdapter(new AppAdapter(this));
+//		grid.setEmptyView(findViewById(android.R.id.empty));
+
+		bottomNav = (BottomNavigationView) findViewById(R.id.bottomNav);
+		bottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
 
 		// ensure Bluetooth exists
 		if (!ensureBLEExists())
 			finish();
-
-		final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		drawer.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-
-		// configure the app grid
-		final GridView grid = (GridView) findViewById(R.id.grid);
-		grid.setAdapter(new AppAdapter(this));
-		grid.setEmptyView(findViewById(android.R.id.empty));
 		initPermission();
 		//如果 API level 是大于等于 23(针对Android 6.0及以上系统) 时,需要判断是否具有权限
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -60,6 +72,29 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 	}
+
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+			= item -> {
+				switch (item.getItemId()) {
+					case R.id.navigation_uart:
+						Log.e("bottomMenuView:", "uart");
+						return true;
+					case R.id.navigation_3d:
+						Log.e("bottomMenuView:", "3d");
+						return true;
+					case R.id.navigation_calibration:
+						Log.e("bottomMenuView:", "calibration");
+						return true;
+					case R.id.navigation_rate:
+						Log.e("bottomMenuView:", "rate");
+						return true;
+					case R.id.navigation_gesture:
+						Log.e("bottomMenuView:", "gesture");
+						return true;
+				}
+				return false;
+			};
+
 
 	// todo 蓝牙动态申请权限
 	private void initPermission(){

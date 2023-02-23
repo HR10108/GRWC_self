@@ -12,6 +12,6 @@
     <color name="headerBackgroundColorDark">#0081B7</color>
     <color name="headerTextColor">#FFFFFF</color>
     <color name="actionBarMenuTextColor">#FFFFFF</color>
-    
+    <color name="white">#FFFFFFFF</color>
     <color name="darkGray">#AAABAF</color>
 </resources>

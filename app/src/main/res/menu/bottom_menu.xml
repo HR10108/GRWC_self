@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_uart"
+        android:icon="@drawable/ic_proximity_feature"
+        android:title="无线连接" />
+    <item
+        android:id="@+id/navigation_3d"
+        android:icon="@drawable/threedimension"
+        android:title="3D显示" />
+    <item
+        android:id="@+id/navigation_calibration"
+        android:icon="@drawable/calibration"
+        android:title="磁力计矫正" />
+    <item
+        android:id="@+id/navigation_gesture"
+        android:icon="@drawable/gesture"
+        android:title="手势识别" />
+    <item
+        android:id="@+id/navigation_rate"
+        android:icon="@drawable/ic_hrs_feature"
+        android:title="心率测量" />
+</menu>
