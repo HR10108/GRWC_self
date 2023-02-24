@@ -11,11 +11,14 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelUuid;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +28,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -115,7 +119,7 @@ public class ScannerFragment extends DialogFragment {
 	}
 
 	@NonNull
-    @Override
+	@Override
 	public Dialog onCreateDialog(final Bundle savedInstanceState) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_device_selection, null);
@@ -167,8 +171,14 @@ public class ScannerFragment extends DialogFragment {
 
 	@Override
 	public void onRequestPermissionsResult(final int requestCode, final @NonNull String[] permissions, final @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		Log.e("hello", String.valueOf(requestCode)+"lll");
 		switch (requestCode) {
 			case REQUEST_PERMISSION_REQ_CODE: {
+				if(grantResults.length == 0) {
+					Log.e("hello", String.valueOf(requestCode));
+					break;
+				}
 				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					// We have been granted the Manifest.permission.ACCESS_COARSE_LOCATION permission. Now we may proceed with scanning.
 					startScan();
@@ -189,13 +199,16 @@ public class ScannerFragment extends DialogFragment {
 		// Since Android 6.0 we need to obtain either Manifest.permission.ACCESS_COARSE_LOCATION or Manifest.permission.ACCESS_FINE_LOCATION to be able to scan for
 		// Bluetooth LE devices. This is related to beacons as proximity devices.
 		// On API older than Marshmallow the following code does nothing.
+		Log.e("hello","Start");
+
 		if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 			// When user pressed Deny and still wants to use this functionality, show the rationale
+
 			if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) && mPermissionRationale.getVisibility() == View.GONE) {
 				mPermissionRationale.setVisibility(View.VISIBLE);
 				return;
 			}
-
+			//ScannerFragment.this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_REQ_CODE);
 			requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_PERMISSION_REQ_CODE);
 			return;
 		}
@@ -257,6 +270,16 @@ public class ScannerFragment extends DialogFragment {
 	};
 
 	private void addBondedDevices() {
+		if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+			// TODO: Consider calling
+			//    ActivityCompat#requestPermissions
+			// here to request the missing permissions, and then overriding
+			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+			//                                          int[] grantResults)
+			// to handle the case where the user grants the permission. See the documentation
+			// for ActivityCompat#requestPermissions for more details.
+			return;
+		}
 		final Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
 		mAdapter.addBondedDevices(devices);
 	}

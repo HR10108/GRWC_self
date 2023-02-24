@@ -5,6 +5,7 @@ android {
     buildToolsVersion '32.1.0-rc1'
 
     defaultConfig {
+        multiDexEnabled true
         applicationId "no.nordicsemi.android.nrftoolbox"
         minSdkVersion 18
         targetSdkVersion 32
@@ -21,6 +22,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.android.material:material:1.8.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.google.android.gms:play-services-wearable:9.2.0'
@@ -37,6 +39,7 @@ dependencies {
     //wearApp project(':wear')
     // The DFU Library is imported automatically from jcenter.
     implementation 'no.nordicsemi.android:dfu:1.1.1'
+    implementation 'com.google.android.things:androidthings:1.0'
     // If you want to make some changes in the DFU Library, clone the https://github.com/NordicSemiconductor/Android-DFU-Library project into DFULibrary folder,
     // add it as a module in Project Structure and uncomment the following line:
     // compile project(':dfu')
