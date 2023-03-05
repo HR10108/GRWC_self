@@ -10,14 +10,14 @@
         android:title="3D显示" />
     <item
         android:id="@+id/navigation_calibration"
-        android:icon="@drawable/calibration"
-        android:title="磁力计矫正" />
+        android:icon="@drawable/____compass_one"
+        android:title="方向指南" />
     <item
         android:id="@+id/navigation_gesture"
         android:icon="@drawable/gesture"
         android:title="手势识别" />
     <item
         android:id="@+id/navigation_rate"
-        android:icon="@drawable/ic_hrs_feature"
-        android:title="心率测量" />
+        android:icon="@drawable/ic_stat_notify_rsc"
+        android:title="步数统计" />
 </menu>

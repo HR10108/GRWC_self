@@ -12,6 +12,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -121,6 +123,7 @@ public class GestureActivity extends AppCompatActivity {
                         if (checksum % 256 == buffer[len]) { //判断校验位
                             if (buffer[3] == 0xA0)  //帧识别码，针对手势识别
                             {
+                                Log.e("hello_gesture", DataConvey.RX_DATA);
                                 switch (buffer[4]) {
                                     case 0 : gestureLabel = "待机"; break;
                                     case 1 : gestureLabel = "右旋"; break;
@@ -135,6 +138,7 @@ public class GestureActivity extends AppCompatActivity {
                                     case 254 : gestureLabel = "无法识别"; break;
                                     default : break;
                                 }
+                                textView.setText(gestureLabel);     //显示手势
                                 if(isPlaying) {
                                     switch (buffer[4]) {   //播放指定的音频
                                         case 0 : soundPool.play(soundmap.get(1),1,1,0,0,1); break;
@@ -155,7 +159,7 @@ public class GestureActivity extends AppCompatActivity {
                         }
                     }
                 }
-                textView.setText(gestureLabel);     //显示手势
+
             }
         }
     };

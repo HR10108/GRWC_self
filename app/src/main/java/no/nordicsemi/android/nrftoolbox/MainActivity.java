@@ -47,7 +47,7 @@ import no.nordicsemi.android.nrftoolbox.uart.UARTActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-
+	private List<String> mPermissionList = new ArrayList<>();
 	static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 1;
 	BottomNavigationView bottomNav = null;
 	List<View> listViews;
@@ -134,14 +134,16 @@ public class MainActivity extends AppCompatActivity {
 			finish();
 		//initPermission();
 		//如果 API level 是大于等于 23(针对Android 6.0及以上系统) 时,需要判断是否具有权限
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-			{
-				Toast.makeText(getApplicationContext(),"对于android 6.0及以上系统的手机，请务必允许该APP软件获取手机定位(位置)权限,打开定位权限后，退出并重新打开APP即可",Toast.LENGTH_SHORT).show();
-				//请求权限
-				ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ACCESS_COARSE_LOCATION);
-			}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+			mPermissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+			mPermissionList.add(Manifest.permission.BLUETOOTH_SCAN);
+			mPermissionList.add(Manifest.permission.BLUETOOTH_CONNECT);
+			mPermissionList.add(Manifest.permission.BLUETOOTH);
+			mPermissionList.add(Manifest.permission.BLUETOOTH_PRIVILEGED);
+			mPermissionList.add(Manifest.permission.BLUETOOTH_ADMIN);
 		}
+		mPermissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+		ActivityCompat.requestPermissions(this,mPermissionList.toArray(new String[0]), REQUEST_CODE_ACCESS_COARSE_LOCATION);
 	}
 
 	private View getView(String id, Intent intent) {

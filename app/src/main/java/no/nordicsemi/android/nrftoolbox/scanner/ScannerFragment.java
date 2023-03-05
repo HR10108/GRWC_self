@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelUuid;
@@ -46,7 +47,7 @@ import no.nordicsemi.android.support.v18.scanner.ScanSettings;
  */
 public class ScannerFragment extends DialogFragment {
 	private final static String TAG = "ScannerFragment";
-
+	private List<String> mPermissionList = new ArrayList<>();
 	private final static String PARAM_UUID = "param_uuid";
 	private final static long SCAN_DURATION = 5000;
 
@@ -199,19 +200,6 @@ public class ScannerFragment extends DialogFragment {
 		// Since Android 6.0 we need to obtain either Manifest.permission.ACCESS_COARSE_LOCATION or Manifest.permission.ACCESS_FINE_LOCATION to be able to scan for
 		// Bluetooth LE devices. This is related to beacons as proximity devices.
 		// On API older than Marshmallow the following code does nothing.
-		Log.e("hello","Start");
-
-		if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			// When user pressed Deny and still wants to use this functionality, show the rationale
-
-			if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) && mPermissionRationale.getVisibility() == View.GONE) {
-				mPermissionRationale.setVisibility(View.VISIBLE);
-				return;
-			}
-			//ScannerFragment.this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_REQ_CODE);
-			requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_PERMISSION_REQ_CODE);
-			return;
-		}
 
 		// Hide the rationale message, we don't need it anymore.
 		if (mPermissionRationale != null)
@@ -237,6 +225,7 @@ public class ScannerFragment extends DialogFragment {
 			}
 		}, SCAN_DURATION);
 	}
+
 
 	/**
 	 * Stop scan if user tap Cancel button

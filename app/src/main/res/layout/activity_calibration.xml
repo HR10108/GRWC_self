@@ -118,13 +118,13 @@
                 android:id="@+id/calibration_button1"
                 android:layout_alignParentStart="true" />
 
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="状态显示"
-                style="@style/Widget.Calibration"
-                android:id="@+id/calibration_button3"
-                android:layout_centerHorizontal="true" />
+         <Button
+             android:id="@+id/calibration_button3"
+             style="@style/Widget.Calibration"
+             android:layout_width="100dp"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+             android:text="状态显示" />
 
             <Button
                 android:layout_width="100dp"
