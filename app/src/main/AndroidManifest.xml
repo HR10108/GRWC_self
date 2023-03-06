@@ -37,11 +37,14 @@
 
     <application
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="true"
         android:icon="@mipmap/hehe"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:dataExtractionRules="@xml/data_extraction_rules">
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".compass.CompassActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivityHello"
             android:exported="true"
@@ -55,11 +58,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.TranslucentStatusBar">
-
-        </activity>
+            android:theme="@style/AppTheme.TranslucentStatusBar"></activity>
         <activity
             android:name=".gesture.GestureActivity"
             android:exported="true"

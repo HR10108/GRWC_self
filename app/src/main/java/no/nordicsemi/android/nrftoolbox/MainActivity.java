@@ -40,13 +40,14 @@ import java.util.List;
 
 import no.nordicsemi.android.nrftoolbox.adapter.AppAdapter;
 import no.nordicsemi.android.nrftoolbox.calibration.CalibrationActivity;
+import no.nordicsemi.android.nrftoolbox.compass.CompassActivity;
 import no.nordicsemi.android.nrftoolbox.gesture.GestureActivity;
 import no.nordicsemi.android.nrftoolbox.heartrate.HRSActivity;
 import no.nordicsemi.android.nrftoolbox.threedimension.ThreeDimensionActivity;
 import no.nordicsemi.android.nrftoolbox.uart.UARTActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 	private List<String> mPermissionList = new ArrayList<>();
 	static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 1;
 	BottomNavigationView bottomNav = null;
@@ -59,18 +60,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_new);
-
-//        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-//        setSupportActionBar(toolbar);
-//		toolbar.setOnMenuItemClickListener(onMenuItemClick);  // Menu item click 的监听事件一樣要設定在setSupportActionBar才有作用
-//
-//		final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//		drawer.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-//
-//		// configure the app grid
-//		final GridView grid = (GridView) findViewById(R.id.grid);
-//		grid.setAdapter(new AppAdapter(this));
-//		grid.setEmptyView(findViewById(android.R.id.empty));
 
 		bottomNav = (BottomNavigationView) findViewById(R.id.bottomNav);
 		bottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -86,8 +75,10 @@ public class MainActivity extends AppCompatActivity {
 		listViews.add(getView("Uart",uart));
 		Intent threeD = new Intent(context, ThreeDimensionActivity.class);
 		listViews.add(getView("3D",threeD));
-		Intent calibration = new Intent(context, CalibrationActivity.class);
-		listViews.add(getView("Calibration",calibration));
+		//3.6 加入compass
+		Intent compass = new Intent(context, CompassActivity.class);
+		listViews.add(getView("Compass",compass));
+
 		Intent gesture = new Intent(context, GestureActivity.class);
 		listViews.add(getView("Gesture",gesture));
 		Intent hrs = new Intent(context, HRSActivity.class);
@@ -111,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 						bottomNav.setSelectedItemId(R.id.navigation_3d);
 						break;
 					case 2:
-						bottomNav.setSelectedItemId(R.id.navigation_calibration);
+						bottomNav.setSelectedItemId(R.id.navigation_compass);
 						break;
 					case 3:
 						bottomNav.setSelectedItemId(R.id.navigation_gesture);
@@ -160,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 					case R.id.navigation_3d:
 						pager.setCurrentItem(1);
 						return true;
-					case R.id.navigation_calibration:
+					case R.id.navigation_compass:
 						pager.setCurrentItem(2);
 						return true;
 					case R.id.navigation_rate:

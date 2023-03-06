@@ -9,7 +9,7 @@
         android:icon="@drawable/threedimension"
         android:title="3D显示" />
     <item
-        android:id="@+id/navigation_calibration"
+        android:id="@+id/navigation_compass"
         android:icon="@drawable/____compass_one"
         android:title="方向指南" />
     <item
