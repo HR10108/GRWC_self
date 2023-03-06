@@ -1,5 +1,6 @@
 package no.nordicsemi.android.nrftoolbox.profile;
 
+import android.Manifest;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -14,7 +15,9 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +38,7 @@ import no.nordicsemi.android.log.Logger;
 import no.nordicsemi.android.nrftoolbox.AppHelpFragment;
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.scanner.ScannerFragment;
+import no.nordicsemi.android.nrftoolbox.utility.DataConvey;
 import no.nordicsemi.android.nrftoolbox.utility.DebugLogger;
 
 public abstract class BleProfileServiceReadyActivity<E extends BleProfileService.LocalBinder> extends AppCompatActivity implements
@@ -151,6 +155,8 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			Logger.d(mLogSession, "Activity bound to the service");
 			onServiceBinded(bleService);
 
+			//更新数据
+			DataConvey.connected = true;
 			// Update UI
 			mDeviceName = bleService.getDeviceName();
 			mDeviceNameView.setText(mDeviceName);
@@ -175,7 +181,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 			Logger.d(mLogSession, "Activity disconnected from the service");
 			mDeviceNameView.setText(getDefaultDeviceName());
 			mConnectButton.setText(R.string.action_connect);
-
+			DataConvey.connected = false;
 			mService = null;
 			mDeviceName = null;
 			mBluetoothDevice = null;
@@ -391,6 +397,7 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 	 * Called when user press CONNECT or DISCONNECT button. See layout files -> onClick attribute.
 	 */
 	public void onConnectClicked(final View view) {
+		Log.e("hello_onConnect", "here");
 		if (isBLEEnabled()) {
 			if (mService == null) {
 				setDefaultUI();
@@ -657,6 +664,16 @@ public abstract class BleProfileServiceReadyActivity<E extends BleProfileService
 
 	protected void showBLEDialog() {
 		final Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+			// TODO: Consider calling
+			//    ActivityCompat#requestPermissions
+			// here to request the missing permissions, and then overriding
+			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+			//                                          int[] grantResults)
+			// to handle the case where the user grants the permission. See the documentation
+			// for ActivityCompat#requestPermissions for more details.
+			return;
+		}
 		startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
 	}
 }

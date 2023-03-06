@@ -49,7 +49,7 @@ public class CompassView extends View implements SensorEventListener {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         paint.setColor(Color.rgb(0,108,57));
-        direction = TransferData1(DataConvey.yaw);
+//        direction = TransferData1(DataConvey.yaw);
         Log.e("hello_compass_onDraw", String.valueOf(direction));
         int cx = getWidth() / 2;
         int cy = getHeight() / 2;
@@ -109,7 +109,7 @@ public class CompassView extends View implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) {
-//            direction = event.values[0];
+            direction = event.values[0];
             invalidate();
         }
     }

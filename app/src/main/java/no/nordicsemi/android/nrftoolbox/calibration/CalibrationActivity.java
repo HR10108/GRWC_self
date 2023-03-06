@@ -25,12 +25,11 @@ import android.widget.Toast;
 
 public class CalibrationActivity extends AppCompatActivity {
     Dialog alertDialog,alertDialog1;
-
+    int hmaxx = 0,hminx = 0,hmaxy = 0,hminy = 0,hmaxz = 0,hminz = 0;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);  //设置返回键操作
@@ -104,7 +103,6 @@ public class CalibrationActivity extends AppCompatActivity {
                 for(int i = 0; i < buffer.length; i++) {  //将字符串转换成short数组
                     buffer[i] = Short.parseShort(RXdata[i],16);
                 }
-                int hmaxx = 0,hminx = 0,hmaxy = 0,hminy = 0,hmaxz = 0,hminz = 0;
                 if ((buffer[0] == 0xa5) && (buffer[1] == 0x5a))  //判断帧头
                 {
                     int len = buffer[2];  //取帧长

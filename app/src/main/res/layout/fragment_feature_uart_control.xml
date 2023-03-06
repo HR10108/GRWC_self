@@ -25,10 +25,10 @@
 		style="@style/Widget.Connect"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:onClick="onConnectClicked"
-		android:text="连接"
 		android:layout_above="@+id/spacer"
-		android:layout_alignStart="@+id/TXData" />
+		android:layout_alignStart="@+id/TXData"
+		android:onClick="onConnectClicked"
+		android:text="连接" />
 
 	<View
 		android:id="@+id/spacer"

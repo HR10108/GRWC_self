@@ -11,4 +11,5 @@ public class DataConvey extends Application {
     public static float pitch;
     public static float roll;
     public static byte calibration_label;
+    public static boolean connected = false;
 }

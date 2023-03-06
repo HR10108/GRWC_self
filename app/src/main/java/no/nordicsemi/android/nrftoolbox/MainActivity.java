@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity{
 		//3.6 加入compass
 		Intent compass = new Intent(context, CompassActivity.class);
 		listViews.add(getView("Compass",compass));
-
 		Intent gesture = new Intent(context, GestureActivity.class);
 		listViews.add(getView("Gesture",gesture));
 		Intent hrs = new Intent(context, HRSActivity.class);

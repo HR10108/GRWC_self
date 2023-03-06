@@ -14,6 +14,8 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import no.nordicsemi.android.log.ILogSession;
 import no.nordicsemi.android.log.LogContract;
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileService;
+import no.nordicsemi.android.nrftoolbox.utility.DataConvey;
 
 public class UARTLogFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 	private static final String SIS_LOG_SCROLL_POSITION = "sis_scroll_position";
@@ -52,6 +55,10 @@ public class UARTLogFragment extends ListFragment implements LoaderManager.Loade
 			// This receiver listens only for the BleProfileService.BROADCAST_CONNECTION_STATE action, no need to check it.
 			final int state = intent.getIntExtra(BleProfileService.EXTRA_CONNECTION_STATE, BleProfileService.STATE_DISCONNECTED);
 
+			if(DataConvey.connected){
+				//TODO
+			}
+
 			switch (state) {
 				case BleProfileService.STATE_CONNECTED: {
 					break;
@@ -69,6 +76,7 @@ public class UARTLogFragment extends ListFragment implements LoaderManager.Loade
 		}
 	};
 
+
 	private ServiceConnection mServiceConnection = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(final ComponentName name, final IBinder service) {
@@ -85,6 +93,11 @@ public class UARTLogFragment extends ListFragment implements LoaderManager.Loade
 		@Override
 		public void onServiceDisconnected(final ComponentName name) {
 			mUARTInterface = null;
+		}
+
+		@Override
+		public void onNullBinding(ComponentName name) {
+			ServiceConnection.super.onNullBinding(name);
 		}
 	};
 
@@ -108,6 +121,7 @@ public class UARTLogFragment extends ListFragment implements LoaderManager.Loade
 		 * If the service has not been started before the following lines will not start it. However, if it's running, the Activity will be binded to it
 		 * and notified via mServiceConnection.
 		 */
+		Log.e("hello_Log","onStart");
 		final Intent service = new Intent(getActivity(), UARTService.class);
 		getActivity().bindService(service, mServiceConnection, 0); // we pass 0 as a flag so the service will not be created if not exists
 	}
@@ -196,6 +210,7 @@ public class UARTLogFragment extends ListFragment implements LoaderManager.Loade
 	 */
 	public void onServiceStarted() {
 		// The service has been started, bind to it
+		Log.e("hello_Log","ServiceStart");
 		final Intent service = new Intent(getActivity(), UARTService.class);
 		getActivity().bindService(service, mServiceConnection, 0);
 	}

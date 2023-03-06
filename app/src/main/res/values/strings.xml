@@ -2,7 +2,7 @@
 
 <resources>
 
-    <string name="app_name">智能手环</string>
+    <string name="app_name">健康手环</string>
     <string name="font_path">fonts/trebucbd.ttf</string>
     <string name="normal_font_path">fonts/trebuc.ttf</string>
 

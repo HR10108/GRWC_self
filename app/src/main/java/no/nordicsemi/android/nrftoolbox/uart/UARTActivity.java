@@ -21,12 +21,15 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.UUID;
 
 import no.nordicsemi.android.nrftoolbox.R;
+import no.nordicsemi.android.nrftoolbox.calibration.CalibrationActivity;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileService;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileServiceReadyActivity;
+import no.nordicsemi.android.nrftoolbox.threedimension.ThreeDimensionActivity;
 import no.nordicsemi.android.nrftoolbox.utility.DataConvey;
 
 public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UARTBinder> implements UARTInterface, GoogleApiClient.ConnectionCallbacks {
 
+	Button newButton = null;
 	/** This preference is set to true when initial data synchronization for wearables has been completed. */
 	private final static String PREFS_WEAR_SYNCED = "prefs_uart_synced";
 
@@ -149,6 +152,16 @@ public class UARTActivity extends BleProfileServiceReadyActivity<UARTService.UAR
 			@Override
 			public void onClick(final View v) {
 				onSendClicked();
+			}
+		});
+
+		//加入标定
+		newButton = findViewById(R.id.newButton);
+		newButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				Intent calibration = new Intent(UARTActivity.this, CalibrationActivity.class);
+				startActivity(calibration);
 			}
 		});
 	}
